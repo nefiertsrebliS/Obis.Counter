@@ -3,10 +3,6 @@
   [
     {"type": "ExpansionPanel", "caption": "Basic Settings", "visible": true, "expanded": true, "items": [
       { "type": "NumberSpinner", "name": "Update", "caption": "Updateinterval", "suffix": "Seconds" }
-    ]},
-    {"type": "ExpansionPanel", "caption": "Expert Settings", "visible": true, "items": [
-			{"name": "BasicCheck", "type": "CheckBox", "caption": "Basic Record-Validation" },
-			{"name": "CrcCheck", "type": "CheckBox", "caption": "Record-Validation by Checksum" }
-		]}
+    ]}
   ]
 }
