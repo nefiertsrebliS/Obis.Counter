@@ -1,0 +1,12 @@
+{
+	"translations": {
+		"de": { 
+			"Updateinterval": "Aktualisierungsintervall",
+			"Seconds": "Sekunden",
+			"Basic Settings": "Grundeinstellungen",
+			"Expert Settings": "Experten-Einstellungen",
+			"Basic Record-Validation": "Einfache Datensatzprüfung",
+			"Record-Validation by Checksum": "Datensatzprüfung per Prüfsumme"
+		}
+	}
+}
