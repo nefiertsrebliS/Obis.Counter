@@ -2,7 +2,8 @@
   "elements":
   [
     {"type": "ExpansionPanel", "caption": "Basic Settings", "visible": true, "expanded": true, "items": [
-      { "type": "NumberSpinner", "name": "Update", "caption": "Updateinterval", "suffix": "Seconds" }
+      { "type": "NumberSpinner", "name": "Update", "caption": "Updateinterval", "suffix": "Seconds", "minimum": 1},
+      { "type": "CheckBox", "name": "sendOpeningSequence", "caption": "Send Opening Sequence"}
     ]}
   ]
 }

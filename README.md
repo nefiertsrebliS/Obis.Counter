@@ -19,9 +19,10 @@ Fertig!
 
 ## Changelog
 
-| Version | Änderungen							            |
-| --------|-------------------------------------------------|
-| V1.00   | Basisversion					            	|
+| Version | Änderungen							                    |
+| --------|---------------------------------------------------------|
+| V1.00   | Basisversion					            	        |
+| V1.01   | Neu: Sende Eröffnungssequenz<br>Neu: weitere Formate   	|
 
 ## License
 

@@ -11,6 +11,7 @@ class ObisPlain extends IPSModule
         parent::Create();
 
         $this->RegisterPropertyInteger('Update', 1);
+        $this->RegisterPropertyBoolean('sendOpeningSequence', false);
 
 		#----------------------------------------------------------------------------------------
 		# Timer zum Aktualisieren der Daten
@@ -56,6 +57,7 @@ class ObisPlain extends IPSModule
 	{
 		switch($Ident) {
 			case "OpenFilter":
+                if($this->ReadPropertyBoolean('sendOpeningSequence'))$this->SendOpeningSequence();
                 $this->SetReceiveDataFilter("");
 				break;
 		}
@@ -71,17 +73,32 @@ class ObisPlain extends IPSModule
         $this->SendDebug("Received", $Payload, 0);
 
         foreach(explode(chr(13).chr(10), $Payload) as $line){
-            $this->SendDebug("Line", $line, 0);
-            $result = sscanf($line, "%d-%d:%d.%d.%d*%d(%f*%s");
-            if(!isset($result[7])) continue;                    #   kein gültiger String
-            if($result[0] != 1) continue;                       #   keine Elektrizität
-            if($result[2] < 1 || $result[2] >= 96) continue;    #   kein Datentyp
-            $result[7] = str_replace(')', '', $result[7]);
 
-            $Index = vsprintf('%d.%d.%d*%d', array_slice($result, 2, 4));
+            $formats = array(
+                "%d-%d:%d.%d.%d*%d(%f*%s",
+                "%d-%d:%d.%d.%d(%f*%s",
+                "%d.%d.%d(%f*%s",
+            );
 
-            $this->RegisterVariableFloat(md5($Index), $Index, $this->GetProfile($result[7]));
-            $this->SetValue(md5($Index), $result[6]);
+            foreach($formats as $key=>$format){
+                $result = sscanf($line, $format);
+                $count = substr_count($format, '%')-1;
+                if(isset($result[$count])){
+                    if(strstr($result[$count],'(') !== false)$result[$count] = explode('(',$result[$count])[0];
+                    if(strstr($result[$count],')') !== false)$result[$count] = explode(')',$result[$count])[0];
+                    switch($key){
+                        case 0:
+                            $this->AddValue(vsprintf('%d.%d.%d*%d', array_slice($result, 2, 4)), $result[6], $result[7]);
+                            break;
+                        case 1:
+                            $this->AddValue(vsprintf('%d.%d.%d', array_slice($result, 2, 3)), $result[5], $result[6]);
+                            break;                
+                        case 2:
+                            $this->AddValue(vsprintf('%d.%d.%d', array_slice($result, 0, 3)), $result[3], $result[4]);
+                            break;                
+                    }
+                }
+            }
         }
         $this->SetReceiveDataFilter(".*BLOCKED.*");
     }
@@ -131,10 +148,48 @@ class ObisPlain extends IPSModule
                 break;
             
             default:
-            $Profile = '';
-            break;
+                $Profile = '';
+                break;
         }
 
         return $Profile;
+    }
+	 
+    #=====================================================================================
+    public function GetConfigurationForm() 
+    #=====================================================================================
+    {
+        $form = json_decode(file_get_contents(__DIR__ . '/form.json'));
+        foreach($form->elements as &$element){
+            if(isset($element->items)){
+                foreach($element->items as &$item){
+                    $this->SendDebug('Item', json_encode($item), 0);
+                    if(isset($item->name) && $item->name == "Update"){
+                        $item->minimum = $this->ReadPropertyBoolean('sendOpeningSequence')?5:1;
+                    }
+                }
+            }
+        }
+        return json_encode($form);
+    }
+
+	#================================================================================================
+	private function SendOpeningSequence() 
+	#================================================================================================
+	{
+        $this->SendDataToParent(json_encode([
+            'DataID' => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}",
+            'Buffer' => utf8_encode('/?!'.chr(13).chr(10)),
+        ]));
+	}
+
+	#================================================================================================
+    private function AddValue($Index, $Value, $Profile)
+	#================================================================================================
+    {
+        if(@$this->GetIDForIdent(md5($Index)) === false){
+            $this->RegisterVariableFloat(md5($Index), $Index, $this->GetProfile($Profile));
+        }
+        $this->SetValue(md5($Index), $Value);
     }
 }
