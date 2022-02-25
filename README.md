@@ -23,6 +23,7 @@ Fertig!
 | --------|---------------------------------------------------------|
 | V1.00   | Basisversion					            	        |
 | V1.01   | Neu: Sende Eröffnungssequenz<br>Neu: weitere Formate   	|
+| V1.04   | Optimierung der Programmstruktur                       	|
 
 ## License
 

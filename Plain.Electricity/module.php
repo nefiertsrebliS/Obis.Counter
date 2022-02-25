@@ -41,7 +41,7 @@ class ObisPlain extends IPSModule
                     "ParseType":0,
                     "LeftCutChar":"",
                     "LeftCutCharAsHex":true,
-                    "RightCutChar":"0D 0A 21 0D 0A",
+                    "RightCutChar":"0D 0A",
                     "RightCutCharAsHex":true,
                     "DeleteCutChars":false,
                     "InputLength":0,
@@ -72,35 +72,34 @@ class ObisPlain extends IPSModule
         $Payload = utf8_decode($data->Buffer);
         $this->SendDebug("Received", $Payload, 0);
 
-        foreach(explode(chr(13).chr(10), $Payload) as $line){
+        $formats = array(
+            "%d-%d:%d.%d.%d*%d(%f*%s",
+            "%d-%d:%d.%d.%d(%f*%s",
+            "%d.%d.%d(%f*%s",
+        );
 
-            $formats = array(
-                "%d-%d:%d.%d.%d*%d(%f*%s",
-                "%d-%d:%d.%d.%d(%f*%s",
-                "%d.%d.%d(%f*%s",
-            );
-
-            foreach($formats as $key=>$format){
-                $result = sscanf($line, $format);
-                $count = substr_count($format, '%')-1;
-                if(isset($result[$count])){
-                    if(strstr($result[$count],'(') !== false)$result[$count] = explode('(',$result[$count])[0];
-                    if(strstr($result[$count],')') !== false)$result[$count] = explode(')',$result[$count])[0];
-                    switch($key){
-                        case 0:
-                            $this->AddValue(vsprintf('%d.%d.%d*%d', array_slice($result, 2, 4)), $result[6], $result[7]);
-                            break;
-                        case 1:
-                            $this->AddValue(vsprintf('%d.%d.%d', array_slice($result, 2, 3)), $result[5], $result[6]);
-                            break;                
-                        case 2:
-                            $this->AddValue(vsprintf('%d.%d.%d', array_slice($result, 0, 3)), $result[3], $result[4]);
-                            break;                
-                    }
+        foreach($formats as $key=>$format){
+            $result = sscanf($Payload, $format);
+            $count = substr_count($format, '%')-1;
+            if(isset($result[$count])){
+                if(strstr($result[$count],'(') !== false)$result[$count] = explode('(',$result[$count])[0];
+                if(strstr($result[$count],')') !== false)$result[$count] = explode(')',$result[$count])[0];
+                switch($key){
+                    case 0:
+                        $this->AddValue(vsprintf('%d.%d.%d*%d', array_slice($result, 2, 4)), $result[6], $result[7]);
+                        break;
+                    case 1:
+                        $this->AddValue(vsprintf('%d.%d.%d', array_slice($result, 2, 3)), $result[5], $result[6]);
+                        break;                
+                    case 2:
+                        $this->AddValue(vsprintf('%d.%d.%d', array_slice($result, 0, 3)), $result[3], $result[4]);
+                        break;                
                 }
             }
         }
-        $this->SetReceiveDataFilter(".*BLOCKED.*");
+
+
+        if($Payload == '!')$this->SetReceiveDataFilter(".*BLOCKED.*");
     }
 
 	#================================================================================================
@@ -163,7 +162,6 @@ class ObisPlain extends IPSModule
         foreach($form->elements as &$element){
             if(isset($element->items)){
                 foreach($element->items as &$item){
-                    $this->SendDebug('Item', json_encode($item), 0);
                     if(isset($item->name) && $item->name == "Update"){
                         $item->minimum = $this->ReadPropertyBoolean('sendOpeningSequence')?5:1;
                     }
@@ -177,10 +175,23 @@ class ObisPlain extends IPSModule
 	private function SendOpeningSequence() 
 	#================================================================================================
 	{
+        $this->SendParent('/?!');
+	}
+
+	#================================================================================================
+	private function SendParent($Payload) 
+	#================================================================================================
+	{
+        if(!$this->HasActiveParent()){
+            $this->SendDebug('Error', 'Interface not active', 0);
+            return;
+        }
+        $Payload .= chr(13).chr(10);
         $this->SendDataToParent(json_encode([
             'DataID' => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}",
-            'Buffer' => utf8_encode('/?!'.chr(13).chr(10)),
+            'Buffer' => utf8_encode($Payload),
         ]));
+        $this->SendDebug('SendParent', $Payload, 0);
 	}
 
 	#================================================================================================
