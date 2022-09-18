@@ -4,6 +4,9 @@
     {"type": "ExpansionPanel", "caption": "Basic Settings", "visible": true, "expanded": true, "items": [
       { "type": "NumberSpinner", "name": "Update", "caption": "Updateinterval", "suffix": "Seconds", "minimum": 1},
       { "type": "CheckBox", "name": "sendOpeningSequence", "caption": "Send Opening Sequence"}
-    ]}
+    ]},
+    {"type": "ExpansionPanel", "caption": "Expert Settings", "visible": true, "items": [
+			{"name": "AddMissing", "type": "CheckBox", "caption": "Add missing Variables" }
+		]}
   ]
 }

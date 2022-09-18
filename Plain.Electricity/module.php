@@ -12,6 +12,7 @@ class ObisPlain extends IPSModule
 
         $this->RegisterPropertyInteger('Update', 1);
         $this->RegisterPropertyBoolean('sendOpeningSequence', false);
+        $this->RegisterPropertyBoolean('AddMissing', true);
 
 		#----------------------------------------------------------------------------------------
 		# Timer zum Aktualisieren der Daten
@@ -198,9 +199,8 @@ class ObisPlain extends IPSModule
     private function AddValue($Index, $Value, $Profile)
 	#================================================================================================
     {
-        if(@$this->GetIDForIdent(md5($Index)) === false){
-            $this->RegisterVariableFloat(md5($Index), $Index, $this->GetProfile($Profile));
-        }
+        if($this->ReadPropertyBoolean('AddMissing')) $this->RegisterVariableFloat(md5($Index), $Index, $this->GetProfile($Profile));
+        if(@$this->GetIDForIdent(md5($Index)) === false)return;
         $this->SetValue(md5($Index), $Value);
     }
 }

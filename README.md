@@ -24,6 +24,7 @@ Fertig!
 | V1.00   | Basisversion					            	        |
 | V1.01   | Neu: Sende Eröffnungssequenz<br>Neu: weitere Formate   	|
 | V1.04   | Optimierung der Programmstruktur                       	|
+| V1.05   | Neu: Option zum Anlegen fehlender Variablen         	|
 
 ## License
 
