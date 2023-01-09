@@ -20,6 +20,7 @@ Das Modul dient dazu Smartmeter-Daten per [Tasmota Smartmeter-Interface](https:/
 #
 ```
 * Für die reibungslose Kommunikation mit IP-Symcon ist wichtig, dass die Namen und die Einheit den Obis-Standards aus folgender Tabelle entsprechen.
+
 |OBIS<br>(C.D.E)|Einheit|Inhalt|
 |1.8.0|Wh|Zählerstand total +A|
 |1.8.1|Wh|Zählerstand total +A, Tarif 1|

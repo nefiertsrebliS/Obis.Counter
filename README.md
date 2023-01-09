@@ -1,7 +1,7 @@
 # Obis-Counter
 
 ## Grundsätzliches
-Die Bibliothek dient dazu Obis basierte Zähler per Infrarot-Lese/Schreibkopf oder beliebige, Tasmota-kompartible Smart-Meter über ein Tasmota-Interface in IP-Symcon einzubinden. 
+Die Bibliothek dient dazu Obis basierte Zähler per Infrarot-Lese/Schreibkopf oder beliebige, Tasmota-kompatible Smart-Meter über ein Tasmota-Interface in IP-Symcon einzubinden. 
 
 Typischerweise ist die Infrarot-Schnittstelle vom Netzversorger aus Datenschutzgründen gesperrt. Wer seinen Zähler in den eigenen 4 Wänden hat, oder wen fremde Blicke auf die eigenen Daten nicht stören, kann die Schnittstelle per PIN freischalten. Die PIN gibt es beim Netzversorger.
 
