@@ -1,0 +1,11 @@
+{
+  "elements":
+  [
+    {"type": "ExpansionPanel", "caption": "Basic Settings", "visible": true, "expanded": true, "items": [
+  		{ "type": "ValidationTextBox", "name": "MQTTTopic", "caption": "MQTT Topic" }
+    ]},
+    {"type": "ExpansionPanel", "caption": "Expert Settings", "visible": true, "items": [
+			{"name": "AddMissing", "type": "CheckBox", "caption": "Add missing Variables" }
+		]}
+  ]
+}

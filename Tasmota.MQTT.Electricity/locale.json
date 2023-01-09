@@ -1,0 +1,9 @@
+{
+	"translations": {
+		"de": { 
+			"Basic Settings": "Grundeinstellungen",
+			"Expert Settings": "Experten-Einstellungen",
+			"Add missing Variables": "fehlende Variablen anlegen"
+		}
+	}
+}

@@ -1,9 +1,17 @@
-# Obis-Counter
+# Obis-Plain-Counter
 
 ## Grundsätzliches
-Die Bibliothek dient dazu Obis basierte Zähler per Infrarot-Lese/Schreibkopf oder beliebige, Tasmota-kompartible Smart-Meter über ein Tasmota-Interface in IP-Symcon einzubinden. 
+Das Modul dient dazu Obis basierte Zähler per Infrarot-Lese/Schreibkopf in IP-Symcon einzubinden. Der Lese/Schreibkopf wird per USB-Anschluss mit dem IP-Symcon-Server verbunden. 
 
-Typischerweise ist die Infrarot-Schnittstelle vom Netzversorger aus Datenschutzgründen gesperrt. Wer seinen Zähler in den eigenen 4 Wänden hat, oder wen fremde Blicke auf die eigenen Daten nicht stören, kann die Schnittstelle per PIN freischalten. Die PIN gibt es beim Netzversorger.
+**Sollte der Datenstrom SML-codiert sein, bitte die Bibliothek SML-Counter wählen.**
+
+## Konfiguration
+
+* In den IO-Instanzen einen Serial-Port erzeugen. Bei der Konfiguration der Baudrate bitte die Angaben des Zähler-Herstellers beachten. Typische Werte sind 300 oder 9600. 
+* Im Objektbaum eine Obis_Plain-Instanz erzeugen. Hierdurch wird automatisch eine Cutter-Instanz im Splitter-Bereich angelegt und konfiguriert.
+* Im letzten Schritt noch die Cutter-Instanz mit dem Serial-Port verbinden.
+
+Fertig!
 
 ## Changelog
 
@@ -13,7 +21,6 @@ Typischerweise ist die Infrarot-Schnittstelle vom Netzversorger aus Datenschutzg
 | V1.01   | Neu: Sende Eröffnungssequenz<br>Neu: weitere Formate   	|
 | V1.04   | Optimierung der Programmstruktur                       	|
 | V1.05   | Neu: Option zum Anlegen fehlender Variablen         	|
-| V2.00   | Neu: OBIS-Tasmota-MQTT-Interface                     	|
 
 ## License
 
