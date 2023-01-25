@@ -5,6 +5,11 @@ Die Bibliothek dient dazu Obis basierte Zähler per Infrarot-Lese/Schreibkopf od
 
 Typischerweise ist die Infrarot-Schnittstelle vom Netzversorger aus Datenschutzgründen gesperrt. Wer seinen Zähler in den eigenen 4 Wänden hat, oder wen fremde Blicke auf die eigenen Daten nicht stören, kann die Schnittstelle per PIN freischalten. Die PIN gibt es beim Netzversorger.
 
+## Module und Konfiguration
+
+[OBIS-Plain-Counter](https://github.com/nefiertsrebliS/Obis.Counter/tree/master/Plain.Electricity)
+[OBIS-Tasmota-MQTT-Counter](https://github.com/nefiertsrebliS/Obis.Counter/tree/master/Tasmota.MQTT.Electricity)
+
 ## Changelog
 
 | Version | Änderungen							                    |

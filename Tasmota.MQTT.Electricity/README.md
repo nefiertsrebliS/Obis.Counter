@@ -33,9 +33,9 @@ Das Modul dient dazu Smartmeter-Daten per [Tasmota Smartmeter-Interface](https:/
 |32.7.0|V|Spannung L1|
 |52.7.0|V|Spannung L2|
 |72.7.0|V|Spannung L3|
-|31.7.0|V|Strom L1|
-|51.7.0|V|Strom L2|
-|71.7.0|V|Strom L3|
+|31.7.0|A|Strom L1|
+|51.7.0|A|Strom L2|
+|71.7.0|A|Strom L3|
 |81.7.1|°|Phasenwinkel U-L2 zu U-L1|
 |81.7.2|°|Phasenwinkel U-L3 zu U-L1|
 |81.7.4|°|Phasenwinkel I-L1 zu U-L1|
