@@ -13,7 +13,7 @@ Das Modul dient dazu Smartmeter-Daten per [Tasmota Smartmeter-Interface](https:/
 
 =>sensor53 r
 >M 1
-+1,3,s,0,9600,
++1,3,s,0,9600,Counter1
 1,77070100010800ff@1,Gesamtverbrauch,Wh,1.8.0,2
 1,77070100020800ff@1,Gesamteinspeisung,Wh,2.8.0,2
 1,77070100100700ff@1,Verbrauch,W,16.7.0,0
@@ -47,6 +47,7 @@ Das Modul dient dazu Smartmeter-Daten per [Tasmota Smartmeter-Interface](https:/
 
 * Im Objektbaum eine ObisTasmotaMQTT-Instanz erzeugen. Hierdurch wird automatisch eine  Verbindung zum MQTT-Server angelegt und ggf. konfiguriert.
 * Im letzten Schritt noch das MQTT-Topic des Tasmota-Smartmeter-Interfaces eingeben und speichern.
+* Sind an das Tasmota-Smartmeter-Interface mehrere Zähler angeschlossen, so ist für jeden Zähler eine eigene Instanz anzulegen und in der Konfiguration der Zählername (im Beispiel oben "Counter1") anzugeben.
 
 Fertig!
 
@@ -55,6 +56,7 @@ Fertig!
 | Version | Änderungen							                    |
 | --------|---------------------------------------------------------|
 | V2.00   | Basisversion					            	        |
+| V2.01   | Neu: mehrere Zähler pro Interface            	        |
 
 ## License
 

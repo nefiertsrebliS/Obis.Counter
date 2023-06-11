@@ -19,6 +19,7 @@ Typischerweise ist die Infrarot-Schnittstelle vom Netzversorger aus Datenschutzg
 | V1.04   | Optimierung der Programmstruktur                       	|
 | V1.05   | Neu: Option zum Anlegen fehlender Variablen         	|
 | V2.00   | Neu: OBIS-Tasmota-MQTT-Interface                     	|
+| V2.01   | Neu: OBIS-Tasmota - mehrere Zähler pro Interface        |
 
 ## License
 

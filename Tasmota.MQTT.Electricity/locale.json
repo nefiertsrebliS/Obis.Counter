@@ -2,6 +2,7 @@
 	"translations": {
 		"de": { 
 			"Basic Settings": "Grundeinstellungen",
+			"Counter Name (only for multiple counters)": "Zähler Name (nur bei mehreren Zählern)",
 			"Expert Settings": "Experten-Einstellungen",
 			"Add missing Variables": "fehlende Variablen anlegen"
 		}

@@ -11,6 +11,7 @@ class ObisTasmotaMQTT extends IPSModule
         parent::Create();
 
         $this->RegisterPropertyString('MQTTTopic', '');
+        $this->RegisterPropertyString('Counter', '');
         $this->RegisterPropertyBoolean('AddMissing', true);
     }
 
@@ -38,11 +39,16 @@ class ObisTasmotaMQTT extends IPSModule
         $data = json_decode($JSONString);
         $this->SendDebug("Received Payload", $data->Payload, 0);
 
-        $Payload = json_decode($data->Payload,true);
-        if(is_array($Payload) && count($Payload) > 1){
-            foreach(next($Payload) as $index=>$value){
-                $this->SendDebug($index, $value, 0);
-                $this->AddValue($index, $value);
+        $Payload = json_decode($data->Payload);
+        if(is_object($Payload)){
+            foreach($Payload as $counter=>$counterData){
+                if($this->ReadPropertyString("Counter") != '' && $this->ReadPropertyString("Counter") != $counter)continue;
+                if(is_object($counterData)){
+                    foreach($counterData as $index=>$value){
+                        $this->SendDebug($index, $value, 0);
+                        $this->AddValue($index, $value);
+                    }
+                }
             }
         }
     }
