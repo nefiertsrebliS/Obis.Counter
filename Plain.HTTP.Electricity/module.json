@@ -1,0 +1,14 @@
+{
+	"id": "{F32C83FC-7666-8829-8AF0-89FAF82A7E35}",
+	"name": "ObisHTTP",
+	"type": 3,
+	"vendor": "Obis",
+	"aliases": 
+	[
+		"Obis over HTTP Counter"
+	],
+	"parentRequirements": ["{D4C1D08F-CD3B-494B-BE18-B36EF73B8F43}"],
+	"childRequirements": [],
+	"implemented": ["{018EF6B5-AB94-40C6-AA53-46943E824ACF}"],
+	"prefix": "OBIS"
+}

@@ -1,7 +1,7 @@
 # Obis-Counter
 
 ## Grundsätzliches
-Die Bibliothek dient dazu Obis basierte Zähler per Infrarot-Lese/Schreibkopf oder beliebige, Tasmota-kompatible Smart-Meter über ein Tasmota-Interface in IP-Symcon einzubinden. 
+Die Bibliothek dient dazu Obis basierte Zähler per Infrarot-Lese/Schreibkopf, per HTTP-Schnittstelle (z.B. Tibber) oder beliebige, Tasmota-kompatible Smart-Meter über ein Tasmota-Interface in IP-Symcon einzubinden. 
 
 Typischerweise ist die Infrarot-Schnittstelle vom Netzversorger aus Datenschutzgründen gesperrt. Wer seinen Zähler in den eigenen 4 Wänden hat, oder wen fremde Blicke auf die eigenen Daten nicht stören, kann die Schnittstelle per PIN freischalten. Die PIN gibt es beim Netzversorger.
 
@@ -9,6 +9,7 @@ Typischerweise ist die Infrarot-Schnittstelle vom Netzversorger aus Datenschutzg
 
 [OBIS-Plain-Counter](https://github.com/nefiertsrebliS/Obis.Counter/tree/master/Plain.Electricity)
 [OBIS-Tasmota-MQTT-Counter](https://github.com/nefiertsrebliS/Obis.Counter/tree/master/Tasmota.MQTT.Electricity)
+[OBIS-HTTP-Counter](https://github.com/nefiertsrebliS/Obis.Counter/tree/master/Plain.HTTP.Electricity)
 
 ## Changelog
 
@@ -20,6 +21,7 @@ Typischerweise ist die Infrarot-Schnittstelle vom Netzversorger aus Datenschutzg
 | V1.05   | Neu: Option zum Anlegen fehlender Variablen         	|
 | V2.00   | Neu: OBIS-Tasmota-MQTT-Interface                     	|
 | V2.01   | Neu: OBIS-Tasmota - mehrere Zähler pro Interface        |
+| V2.02   | Neu: Obis-HTTP-Interface (z.B. Tibber)                  |
 
 ## License
 
