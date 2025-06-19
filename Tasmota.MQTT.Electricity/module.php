@@ -25,7 +25,7 @@ class ObisTasmotaMQTT extends IPSModule
         $this->ConnectParent('{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}');
 			
         #			Filter setzen
-        $filter = ".*\"Topic\":\"".$this->ReadPropertyString("MQTTTopic").".*";
+        $filter = ".*\"Topic\":\"(".$this->ReadPropertyString("MQTTTopic")."|tele/".$this->ReadPropertyString("MQTTTopic").").*";
         $this->SendDebug("ReceiveDataFilter", $filter, 0);
 
         $this->SetReceiveDataFilter($filter);

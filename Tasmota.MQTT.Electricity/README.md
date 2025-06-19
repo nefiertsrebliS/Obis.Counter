@@ -53,10 +53,11 @@ Fertig!
 
 ## Changelog
 
-| Version | Änderungen							                    |
-| --------|---------------------------------------------------------|
-| V2.00   | Basisversion					            	        |
-| V2.01   | Neu: mehrere Zähler pro Interface            	        |
+| Version | Änderungen							                        |
+| --------|-------------------------------------------------------------|
+| V2.00   | Basisversion					            	            |
+| V2.01   | Neu: mehrere Zähler pro Interface            	            |
+| V2.03   | Neu: bessere Erkennung des Topics (unvollständige Eingabe)  |
 
 ## License
 
