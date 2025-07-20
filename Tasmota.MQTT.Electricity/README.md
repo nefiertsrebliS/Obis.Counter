@@ -58,6 +58,7 @@ Fertig!
 | V2.00   | Basisversion					            	            |
 | V2.01   | Neu: mehrere Zähler pro Interface            	            |
 | V2.03   | Neu: bessere Erkennung des Topics (unvollständige Eingabe)  |
+| V2.04   | Fix: Fehlerhafte Topics wurden nicht ausgefiltert           |
 
 ## License
 
