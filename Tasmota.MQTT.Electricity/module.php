@@ -125,9 +125,25 @@ class ObisTasmotaMQTT extends IPSModuleStrict
 	#================================================================================================
     {
         $type = explode('.', $Index)[0];
-        if($this->ReadPropertyBoolean('AddMissing')) $this->RegisterVariableFloat(md5($Index), $Index, $this->GetProfile($type));
-        if(@$this->GetIDForIdent(md5($Index)) === false)return;
-        if($type == 1 || $type == 2)$Value /= 1000;
-        $this->SetValue(md5($Index), $Value);
+        $profile = $this->GetProfile($type);
+        if($this->ReadPropertyBoolean('AddMissing')){
+            if($profile != ''){
+                $this->RegisterVariableFloat(md5($Index), $Index, $profile);
+                if($type == 1 || $type == 2)$Value /= 1000;
+            }else{
+				if(is_bool($Value) || ($Value == "true") || ($Value == "false")){
+					$this->RegisterVariableBoolean(md5($Index), $Index, '');
+				}elseif(is_numeric($Value)){
+					if(is_integer($Value + 0)){
+    					$this->RegisterVariableInteger(md5($Index), $Index, '');
+					}else{
+    					$this->RegisterVariableFloat(md5($Index), $Index, '');
+					}
+				}else{
+					$this->RegisterVariableString(md5($Index), $Index, '');
+				}
+            }
+        } 
+        if(@$this->GetIDForIdent(md5($Index)) != false) $this->SetValue(md5($Index), $Value);
     }
 }

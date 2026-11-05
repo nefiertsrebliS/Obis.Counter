@@ -25,6 +25,7 @@ Typischerweise ist die Infrarot-Schnittstelle vom Netzversorger aus Datenschutzg
 | V2.03   | Neu: OBIS-Tasmota - bessere Erkennung des Topics (unvollständige Eingabe)  |
 | V2.04   | Fix: OBIS-Tasmota - Fehlerhafte Topics wurden nicht ausgefiltert           |
 | V3.00   | Umstellung auf IPSModuleStrict                          |
+| V3.01   | Neu: OBIS-Tasmota - Formaterkennung bei nicht OBIS-konformen Daten         |
 
 ## License
 

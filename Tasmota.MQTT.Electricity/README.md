@@ -59,6 +59,7 @@ Fertig!
 | V2.01   | Neu: mehrere Zähler pro Interface            	            |
 | V2.03   | Neu: bessere Erkennung des Topics (unvollständige Eingabe)  |
 | V2.04   | Fix: Fehlerhafte Topics wurden nicht ausgefiltert           |
+| V3.01   | Neu: OBIS-Tasmota - Formaterkennung bei nicht OBIS-konformen Daten         |
 
 ## License
 
