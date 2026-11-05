@@ -71,7 +71,7 @@ class ObisTasmotaMQTT extends IPSModuleStrict
     }
 
 	#================================================================================================
-    private function GetProfile(int $type): string
+    private function GetProfile(mixed $type): string
 	#================================================================================================
     {
 
