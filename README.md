@@ -22,6 +22,9 @@ Typischerweise ist die Infrarot-Schnittstelle vom Netzversorger aus Datenschutzg
 | V2.00   | Neu: OBIS-Tasmota-MQTT-Interface                     	|
 | V2.01   | Neu: OBIS-Tasmota - mehrere Zähler pro Interface        |
 | V2.02   | Neu: Obis-HTTP-Interface (z.B. Tibber)                  |
+| V2.03   | Neu: OBIS-Tasmota - bessere Erkennung des Topics (unvollständige Eingabe)  |
+| V2.04   | Fix: OBIS-Tasmota - Fehlerhafte Topics wurden nicht ausgefiltert           |
+| V3.00   | Umstellung auf IPSModuleStrict                          |
 
 ## License
 

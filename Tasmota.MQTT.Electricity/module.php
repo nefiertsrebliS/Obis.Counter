@@ -1,10 +1,10 @@
 <?php
 
-class ObisTasmotaMQTT extends IPSModule
+class ObisTasmotaMQTT extends IPSModuleStrict
 {
 
 	#================================================================================================
-    public function Create()
+    public function Create(): void
 	#================================================================================================
     {
         //Never delete this line!
@@ -16,14 +16,12 @@ class ObisTasmotaMQTT extends IPSModule
     }
 
 	#================================================================================================
-    public function ApplyChanges()
+    public function ApplyChanges(): void
 	#================================================================================================
     {
         //Never delete this line!
         parent::ApplyChanges();
 
-        $this->ConnectParent('{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}');
-			
         #			Filter setzen
         $topic = $this->ReadPropertyString("MQTTTopic");
         if(strlen($topic) - strlen("SENSOR") - strrpos($topic, "SENSOR") !== 0){
@@ -37,7 +35,20 @@ class ObisTasmotaMQTT extends IPSModule
     }
 
 	#================================================================================================
-    public function ReceiveData($JSONString)
+    public function GetCompatibleParents(): string
+	#================================================================================================
+    {
+		return json_encode([
+			'type' => 'require',
+			'moduleIDs' => [
+				// MQTT Server
+				'{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}'
+			]
+		]);
+	}
+
+	#================================================================================================
+    public function ReceiveData(string $JSONString): string
 	#================================================================================================
     {
         $this->SendDebug("Received", $JSONString, 0);
@@ -56,10 +67,11 @@ class ObisTasmotaMQTT extends IPSModule
                 }
             }
         }
+        return '';
     }
 
 	#================================================================================================
-    private function GetProfile($type)
+    private function GetProfile(int $type): string
 	#================================================================================================
     {
 
@@ -109,7 +121,7 @@ class ObisTasmotaMQTT extends IPSModule
     }
 
 	#================================================================================================
-    private function AddValue($Index, $Value)
+    private function AddValue(string $Index, mixed $Value): void
 	#================================================================================================
     {
         $type = explode('.', $Index)[0];

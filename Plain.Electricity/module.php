@@ -1,10 +1,10 @@
 <?php
 
-class ObisPlain extends IPSModule
+class ObisPlain extends IPSModuleStrict
 {
 
 	#================================================================================================
-    public function Create()
+    public function Create(): void
 	#================================================================================================
     {
         //Never delete this line!
@@ -22,20 +22,31 @@ class ObisPlain extends IPSModule
     }
 
 	#================================================================================================
-    public function ApplyChanges()
+    public function ApplyChanges(): void
 	#================================================================================================
     {
         //Never delete this line!
         parent::ApplyChanges();
-
-        $this->ForceParent('{AC6C6E74-C797-40B3-BA82-F135D941D1A2}');
 
         $this->SetReceiveDataFilter("");
         $this->SetTimerInterval("Update", $this->ReadPropertyInteger('Update')*1000);
     }
 
 	#================================================================================================
-    public function GetConfigurationForParent() 
+    public function GetCompatibleParents(): string
+	#================================================================================================
+    {
+		return json_encode([
+			'type' => 'require',
+			'moduleIDs' => [
+				// Cutter
+				'{AC6C6E74-C797-40B3-BA82-F135D941D1A2}'
+			]
+		]);
+	}
+
+	#================================================================================================
+    public function GetConfigurationForParent(): string
 	#================================================================================================
     {
         return '{
@@ -53,7 +64,7 @@ class ObisPlain extends IPSModule
     }
 
 	#================================================================================================
-	public function RequestAction($Ident, $Value) 
+	public function RequestAction(string $Ident, mixed $Value): void 
 	#================================================================================================
 	{
 		switch($Ident) {
@@ -65,12 +76,12 @@ class ObisPlain extends IPSModule
 	}
 
 	#================================================================================================
-    public function ReceiveData($JSONString)
+    public function ReceiveData(string $JSONString): string
 	#================================================================================================
     {
         $data = json_decode($JSONString);
 
-        $Payload = utf8_decode($data->Buffer);
+        $Payload = hex2bin($data->Buffer);
         $this->SendDebug("Received", $Payload, 0);
 
         $formats = array(
@@ -99,12 +110,12 @@ class ObisPlain extends IPSModule
             }
         }
 
-
         if($Payload == '!')$this->SetReceiveDataFilter(".*BLOCKED.*");
+        return '';
     }
 
 	#================================================================================================
-    private function GetProfile($unit)
+    private function GetProfile(string $unit): string
 	#================================================================================================
     {
 
@@ -156,7 +167,7 @@ class ObisPlain extends IPSModule
     }
 	 
     #=====================================================================================
-    public function GetConfigurationForm() 
+    public function GetConfigurationForm(): string
     #=====================================================================================
     {
         $form = json_decode(file_get_contents(__DIR__ . '/form.json'));
@@ -173,14 +184,14 @@ class ObisPlain extends IPSModule
     }
 
 	#================================================================================================
-	private function SendOpeningSequence() 
+	private function SendOpeningSequence(): void
 	#================================================================================================
 	{
         $this->SendParent('/?!');
 	}
 
 	#================================================================================================
-	private function SendParent($Payload) 
+	private function SendParent(string $Payload): void
 	#================================================================================================
 	{
         if(!$this->HasActiveParent()){
@@ -190,17 +201,16 @@ class ObisPlain extends IPSModule
         $Payload .= chr(13).chr(10);
         $this->SendDataToParent(json_encode([
             'DataID' => "{79827379-F36E-4ADA-8A95-5F8D1DC92FA9}",
-            'Buffer' => utf8_encode($Payload),
+            'Buffer' => bin2hex($Payload),
         ]));
         $this->SendDebug('SendParent', $Payload, 0);
 	}
 
 	#================================================================================================
-    private function AddValue($Index, $Value, $Profile)
+    private function AddValue(string $Index, mixed $Value, string $Profile): void
 	#================================================================================================
     {
         if($this->ReadPropertyBoolean('AddMissing')) $this->RegisterVariableFloat(md5($Index), $Index, $this->GetProfile($Profile));
-        if(@$this->GetIDForIdent(md5($Index)) === false)return;
-        $this->SetValue(md5($Index), $Value);
+        if(@$this->GetIDForIdent(md5($Index)) != false) $this->SetValue(md5($Index), $Value);
     }
 }
