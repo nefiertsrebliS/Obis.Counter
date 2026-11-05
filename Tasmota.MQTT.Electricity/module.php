@@ -53,9 +53,9 @@ class ObisTasmotaMQTT extends IPSModuleStrict
     {
         $this->SendDebug("Received", $JSONString, 0);
         $data = json_decode($JSONString);
-        $this->SendDebug("Received Payload", $data->Payload, 0);
+        $this->SendDebug("Received Payload", hex2bin($data->Payload), 0);
 
-        $Payload = json_decode($data->Payload);
+        $Payload = json_decode(hex2bin($data->Payload));
         if(is_object($Payload)){
             foreach($Payload as $counter=>$counterData){
                 if($this->ReadPropertyString("Counter") != '' && $this->ReadPropertyString("Counter") != $counter)continue;
